@@ -3,182 +3,181 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: "
-"http://wordpress.org/support/plugin/anspress-question-answer\n"
-"POT-Creation-Date: 2015-09-04 14:06:44+00:00\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/anspress-question-"
+"answer\n"
+"POT-Creation-Date: 2015-09-08 17:44+0300\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n 0.5.0\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
-"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Country: United States\n"
+"PO-Revision-Date: 2015-09-09 13:22+0530\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.7.3\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-Bookmarks: \n"
+"X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
+"Last-Translator: \n"
+"Language: tr_TR\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: tags-for-anspress.php:34
 msgid ""
 "Tags extension require AnsPress 2.4-RC or above. Download from Github "
 "%shttp://github.com/anspress/anspress%s"
 msgstr ""
+"Etiket eklentisi AnsPress 2.4-RC veya daha üstüne ihtiyaç duyar. Github  "
+"%shttp://github.com/anspress/anspress%s  linkinden download edin."
 
 #: tags-for-anspress.php:82 tags-for-anspress.php:550
 msgid "Tag"
-msgstr ""
+msgstr "Etiket"
 
-#: tags-for-anspress.php:83 tags-for-anspress.php:305 tags-for-anspress.php:318
-#: tags-for-anspress.php:368 tags-for-anspress.php:419
-#: tags-for-anspress.php:437 tags-for-anspress.php:754
+#: tags-for-anspress.php:83 tags-for-anspress.php:305
+#: tags-for-anspress.php:318 tags-for-anspress.php:368
+#: tags-for-anspress.php:419 tags-for-anspress.php:437
+#: tags-for-anspress.php:754
 msgid "Tags"
-msgstr ""
+msgstr "Etiketler"
 
 #: tags-for-anspress.php:218
 msgid "AP Tags"
-msgstr ""
+msgstr "AP Etiketleri"
 
 #: tags-for-anspress.php:222
 msgid "Widgets in this area will be shown in anspress tags page."
-msgstr ""
+msgstr "Bu alandaki bileşen AnsPress etiket sayfasında gösterilecektir."
 
 #: tags-for-anspress.php:241
 msgid "Question Tags"
-msgstr ""
+msgstr "Soru Etiketleri"
 
 #: tags-for-anspress.php:243
 msgid "All Tags"
-msgstr ""
+msgstr "Tüm Etiketler"
 
 #: tags-for-anspress.php:245
 msgid "Edit Tag"
-msgstr ""
+msgstr "Etiketi Düzenle"
 
 #: tags-for-anspress.php:246
 msgid "New Tag"
-msgstr ""
+msgstr "Yeni Etiket"
 
 #: tags-for-anspress.php:247
 msgid "View Tag"
-msgstr ""
+msgstr "Etiketi Görüntüle"
 
 #: tags-for-anspress.php:248
 msgid "Search Tag"
-msgstr ""
+msgstr "Etiket Ara"
 
 #: tags-for-anspress.php:249
 msgid "Nothing Found"
-msgstr ""
+msgstr "Hiçbir şey bulunmadı"
 
 #: tags-for-anspress.php:250
 msgid "Nothing found in Trash"
-msgstr ""
+msgstr "Çöpte hiçbirşey bulunmadı"
 
 #: tags-for-anspress.php:305
 msgid "Questions Tags"
-msgstr ""
+msgstr "Soru Etiketleri"
 
 #: tags-for-anspress.php:321
 msgid "Tags to show"
-msgstr ""
+msgstr "Gösterilecek Etiketler"
 
 #: tags-for-anspress.php:322
 msgid "Numbers of tags to show in tags page."
-msgstr ""
+msgstr "Etiketler sayfasında gözükecek etiket sayısı"
 
 #: tags-for-anspress.php:328
 msgid "Maximum tags"
-msgstr ""
+msgstr "Maksimum etiket"
 
 #: tags-for-anspress.php:329
 msgid "Maximum numbers of tags that user can add when asking."
-msgstr ""
+msgstr "Soru sorarken kullanıcının ekleyebileceği maksimum etiket sayısı."
 
 #: tags-for-anspress.php:335
 msgid "Minimum tags"
-msgstr ""
+msgstr "Minimum etiket"
 
 #: tags-for-anspress.php:336
 msgid "minimum numbers of tags that user must add when asking."
-msgstr ""
+msgstr "Soru sorarken kullanıcının eklemesi gereken minimum etiket sayısı."
 
 #: tags-for-anspress.php:430
 msgid "Type and hit enter"
-msgstr ""
+msgstr "Girin ve Enter Tuşuna basın"
 
 #: tags-for-anspress.php:441
 msgid "Slowly type for suggestions"
-msgstr ""
+msgstr "Yorumlarınızı yavaşca tuşlayın"
 
 #: tags-for-anspress.php:508
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriler"
 
 #: tags-for-anspress.php:654
 msgid "Tagged"
-msgstr ""
+msgstr "Etiketlendi"
 
 #: tags-for-anspress.php:712
 msgid "Questions"
-msgstr ""
+msgstr "Sorular"
 
 #: tags-for-anspress.php:772
 msgid "Popular"
-msgstr ""
+msgstr "Popüler"
 
 #: tags-for-anspress.php:773
 msgid "New"
-msgstr ""
+msgstr "Yeni"
 
 #: tags-for-anspress.php:774
 msgid "Name"
-msgstr ""
+msgstr "İsim"
 
 #: theme/no-tags-found.php:15
 msgid "No tags is set!"
-msgstr ""
+msgstr "Hiçbir etiket belirlenmedi!"
 
 #: theme/tag.php:12
 msgid "Question tag: %s"
-msgstr ""
+msgstr "Soru etiket: %s"
 
 #: theme/tag.php:12
 msgid "1 Question"
 msgid_plural "%s Questions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s Soru"
 
 #: theme/tags-question-list.php:22
 msgid "View all questions"
-msgstr ""
+msgstr "Tüm soruları görüntüle"
 
 #: theme/tags.php:23
 msgid "Search tags..."
-msgstr ""
+msgstr "Etiketleri ara..."
 
 #: theme/tags.php:38
 msgid "%d Question"
 msgid_plural "%d Questions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Soru"
 
 #: theme/tags.php:47
 msgid "No description."
-msgstr ""
+msgstr "Açıklama yok."
 
 #: tags-for-anspress.php:242
 msgctxt "tags-for-anspress"
 msgid "Tag"
-msgstr ""
+msgstr "Etiket"
 
 #: tags-for-anspress.php:244
 msgctxt "tags-for-anspress"
 msgid "Add New Tag"
-msgstr ""
+msgstr "Yeni etiket ekle"
