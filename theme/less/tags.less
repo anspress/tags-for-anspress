@@ -8,15 +8,18 @@
 		list-style: none;
 		padding: 0;
 		margin: 0 -15px;
+		
 		>li{
 		    border-bottom: 1px dashed #e4e4e4;
 		    float: left;
 		    margin: 0 0 20px;
 		    padding: 0 0 10px;
 		    width: 25%;
+			
 		    .ap-tags-item {
 			    padding: 0 15px;
 			}
+			
 		    .ap-term-count{
 			    color: #888888;
 			    font-size: 12px;
@@ -35,6 +38,7 @@
 			    text-decoration: none;
 			    text-transform: lowercase;
 			}
+			
 			.ap-taxo-description {
 			    color: #888888;
 			    font-size: 12px;
@@ -53,12 +57,15 @@
 	    margin-bottom: 15px;
 	    margin-top: 10px;
 	}
+	
 	.ap-sub-taxo{
 	    margin-bottom: 30px;
+		
 		li{
 		    margin: 0 10px 15px 0;
 		    min-width: 145px;
-		    a{
+		    
+			a{
 			    background: @white;
 			    border: 1px solid @default-border-color;
 			    .border-radius(2px);
@@ -83,7 +90,8 @@
 	    .border-radius(5px);
 	    margin-bottom: 25px;
 	    padding: 15px 20px;
-	    .ap-tax-item-count {
+	    
+		.ap-tax-item-count {
 		    background: @blue-color;
 		    color: @white;
 		    float: right;
@@ -103,33 +111,108 @@
 	}
 	.ap-tags-input{
 		margin-bottom: 10px;
+		
 		.ap-tagssugg-item {
-		    background: #eee none repeat scroll 0 0;
-		    border-color: #ddd #ddd #ddd #c6c1c1;
-		    border-image: none;
-		    border-radius: 2px;
-		    border-style: solid;
-		    border-width: 1px 1px 1px 3px;
-		    cursor: pointer;
-		    display: inline-block;
-		    font-size: 14px;
-		    margin-right: 5px;
-		    padding: 5px 10px;
-		    &:hover{
-		    	border-color: #ffb0b0;
-		    }
+			display: none;
+			
+			button {
+				background: #eee none repeat scroll 0 0;
+				border-color: #ddd #ddd #ddd #c6c1c1;
+				border-image: none;
+				border-radius: 2px;
+				border-style: solid;
+				border-width: 1px 1px 1px 3px;
+				text-align: left;
+				font-size: 14px;
+				margin-right: 5px;
+				margin-bottom: 5px;
+				padding: 5px 10px;
+				width: 100%;
+				
+				&.ap-tag-add {
+					&:hover,
+					&:active,
+					&:focus,
+					&.focus {
+						border-color: @blue-color;
+						background-color: lighten(@blue-color, 45%)
+					}
+				}
+				
+				&.ap-tag-remove {
+					border-color: @blue-color;
+					
+					&:hover,
+					&:active,
+					&:focus {
+						border-color: @error-color;
+						background-color: lighten(@error-color, 35%);
+					}
+				}
+				
+				i {
+					float: right;
+					margin-left: 5px;
+					font-size: 115%;
+				}
+			}
 		}
-		.ap-tag-remove{
-			margin-left: 5px;
-		}
+		
 		.ap-tags-field {
 		    display: inline-block;
+			margin-bottom: 0px;
+			padding: 8px 10px;
+			height: auto;
 		    width: auto;
+			width: 200px;
+			max-width: 100%;
 		}
 	}
-	#ap-tags-suggestion{
-		span i{
-			display: none;
+	
+	#ap-tags-holder, 
+	#ap-tags-suggestion {
+		list-style: none;
+		margin-top: 0;
+		padding: 0;
+	}
+	
+	#ap-tags-holder {
+		margin-top: 10px;
+    	margin-bottom: 0px;
+		
+		li {
+			display: inline-block;
+			margin-right: 5px;
 		}
+	}
+	
+	#ap-tags-suggestion {
+		display: none;
+		position: absolute;
+		width: 200px;
+		max-width: 100%;
+		border: solid 1px #ccc;
+			
+		li {
+			display: block;
+			margin: 0;
+			padding: 0;
+			
+			button {
+				border-radius: 0px;
+				margin-bottom: 0px;
+			}
+		}
+	}
+	
+	.ap-sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0,0,0,0);
+		border: 0;
 	}
 }
