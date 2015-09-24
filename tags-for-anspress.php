@@ -451,15 +451,9 @@ class Tags_For_AnsPress
 
 		if ( $editing ) {
 			$tags = get_the_terms( $editing_post->ID, 'question_tag' );
-			$tags_string = '';
-
-			if ( is_array( $tags ) ) {
-				foreach ( $tags as $t ) {
-					$tags_string .= $t->name.','; }
-			}
 		}
 
-		$tag_val = $editing ? $tags_string :  sanitize_text_field( @$_POST['tag'] );
+		$tag_val = $editing ? $tags :  $_POST['tags'];
 
 		$tag_field = '<div class="ap-field-tags ap-form-fields"><label class="ap-form-label" for="tags">'.__('Tags', 'tags-for-anspress').'</label>';
 		$tag_field .= '<div data-role="ap-tagsinput" class="ap-tags-input">';
@@ -467,7 +461,7 @@ class Tags_For_AnsPress
 
 		if(!empty($tag_val) && is_array($tag_val)){
 			foreach($tag_val as $tag){
-				$tag_field .= '<span class="ap-tagssugg-item">tag<i class="ap-tag-remove">&times;</i><input type="hidden" name="tags[]" value="'. $tag .'" /></span>';
+				$tag_field .= '<span class="ap-tagssugg-item" title="'. $tag->description .'">'. $tag->slug .'<i class="ap-tag-remove">&times;</i><input type="hidden" name="tags[]" value="'. $tag->slug .'" /></span>';
 			}
 		}
 
@@ -481,7 +475,6 @@ class Tags_For_AnsPress
 			'name' 		=> 'tag',
 			'label' 	=> __( 'Tags', 'tags-for-anspress' ),
 			'type'  	=> 'custom',
-			'value' 	=> ( $editing ? $tags_string :  sanitize_text_field( @$_POST['tag'] )),
 			'taxonomy' 	=> 'question_tag',
 			'desc' 		=> __( 'Slowly type for suggestions', 'tags-for-anspress' ),
 			'order' 	=> 11,
