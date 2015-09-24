@@ -111,62 +111,67 @@
 	}
 	.ap-tags-input{
 		margin-bottom: 10px;
+	}
+
+	#ap-tags-suggestion .ap-tagssugg-item {
+		display: none;
 		
-		.ap-tagssugg-item {
-			display: none;
+		button {
+			background: #fcfcfc none repeat scroll 0 0;
+		    border-color: #ddd;
+		    border-image: none;
+		    border-radius: 2px;
+		    border-style: solid;
+		    border-width: 1px 1px 1px 2px;
+		    font-size: 14px;
+		    margin-bottom: 0;
+		    margin-right: 5px;
+		    padding: 8px 10px;
+		    text-align: left;
+		    width: 100%;
+		    margin: 0;
+		    border: none;
 			
-			button {
-				background: #eee none repeat scroll 0 0;
-				border-color: #ddd #ddd #ddd #c6c1c1;
-				border-image: none;
-				border-radius: 2px;
-				border-style: solid;
-				border-width: 1px 1px 1px 3px;
-				text-align: left;
-				font-size: 14px;
-				margin-right: 5px;
-				margin-bottom: 5px;
-				padding: 5px 10px;
-				width: 100%;
-				
-				&.ap-tag-add {
-					&:hover,
-					&:active,
-					&:focus,
-					&.focus {
-						border-color: @blue-color;
-						background-color: lighten(@blue-color, 45%)
-					}
-				}
-				
-				&.ap-tag-remove {
+			&.ap-tag-add {
+				&:hover,
+				&:active,
+				&:focus,
+				&.focus {
 					border-color: @blue-color;
-					
-					&:hover,
-					&:active,
-					&:focus {
-						border-color: @error-color;
-						background-color: lighten(@error-color, 35%);
-					}
-				}
-				
-				i {
-					float: right;
-					margin-left: 5px;
-					font-size: 115%;
+					background-color: lighten(@blue-color, 45%)
 				}
 			}
+			
+			&.ap-tag-remove {
+				border-color: @blue-color;
+				
+				&:hover,
+				&:active,
+				&:focus {
+					border-color: @error-color;
+					background-color: lighten(@error-color, 35%);
+				}
+			}
+			
+			i {
+				float: right;
+				margin-left: 5px;
+				font-size: 115%;
+			}
 		}
-		
-		.ap-tags-field {
-		    display: inline-block;
-			margin-bottom: 0px;
-			padding: 8px 10px;
-			height: auto;
-		    width: auto;
-			width: 200px;
-			max-width: 100%;
+		&:first-child button{
+			border-top: none;
 		}
+	}
+	
+	.ap-tags-field {
+	    display: inline-block;
+		margin-bottom: 0px;
+		padding: 8px 10px;
+		height: auto;
+	    width: auto;
+		width: 200px;
+		max-width: 100%;
 	}
 	
 	#ap-tags-holder, 
@@ -182,37 +187,53 @@
 		
 		li {
 			display: inline-block;
-			margin-right: 5px;
-		}
-	}
-	
-	#ap-tags-suggestion {
-		display: none;
-		position: absolute;
-		width: 200px;
-		max-width: 100%;
-		border: solid 1px #ccc;
-			
-		li {
-			display: block;
-			margin: 0;
+			margin: 0 8px 0 0;
 			padding: 0;
-			
-			button {
-				border-radius: 0px;
-				margin-bottom: 0px;
+
+			button{
+			    background: #f8f8f8 none repeat scroll 0 0;
+			    border: 2px solid #ddd;
+			    > span{
+			    	margin-right: 5px;
+			    }
+			    .apicon-x {
+				    color: #aaa;
+				    font-size: 11px;
+				}
 			}
 		}
 	}
 	
-	.ap-sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0,0,0,0);
-		border: 0;
+	#ap-tags-suggestion {
+	    display: none;
+	    max-width: 100%;
+	    position: absolute;
+	    width: 200px;
+	    z-index: 999;
+	    border-bottom: solid 1px #ddd;
+			
+		li {
+		    display: block;
+		    margin: 0;
+		    padding: 0;
+		    border-bottom: solid 1px #eee;
+			
+			button {
+				border-radius: 0px;
+				margin-bottom: 0px;
+				border-width: 0 1px 0 2px;
+			}
+		}
 	}
 }
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+

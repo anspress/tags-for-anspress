@@ -97,6 +97,7 @@ class Tags_For_AnsPress
 		add_action( 'ap_display_question_metas', array( $this, 'ap_display_question_metas' ), 10, 2 );
 		add_action( 'ap_question_info', array( $this, 'ap_question_info' ) );
 		add_action( 'ap_enqueue', array( $this, 'ap_enqueue' ) );
+		add_action( 'ap_enqueue', array( $this, 'ap_localize_scripts' ) );
 		add_filter( 'term_link', array( $this, 'term_link_filter' ), 10, 3 );
 		add_action( 'ap_ask_form_fields', array( $this, 'ask_from_tag_field' ), 10, 2 );
 		add_action( 'ap_ask_fields_validation', array( $this, 'ap_ask_fields_validation' ) );
@@ -412,7 +413,7 @@ class Tags_For_AnsPress
 			echo '<div class="ap-post-tags clearfix">'. ap_question_tags_html( array( 'list' => true, 'label' => '' ) ) .'</div></div>';
 		}
 	}
-
+	
 	/**
 	 * Enqueue scripts
 	 * @since 1.0
@@ -420,6 +421,26 @@ class Tags_For_AnsPress
 	public function ap_enqueue() {
 		wp_enqueue_script( 'tags_js', ap_get_theme_url( 'js/tags_js.js', TAGS_FOR_ANSPRESS_URL ) );
 		wp_enqueue_style( 'tags_css', ap_get_theme_url( 'css/tags.css', TAGS_FOR_ANSPRESS_URL ) );
+	}
+	
+	/**
+	 * Add translated strings to the javascript files
+	 * @since 1.0
+	 */
+	public function ap_localize_scripts() {
+		$l10n_data = array(
+			'deleteTag' => __( 'Delete Tag', 'tags-for-anspress' ),
+			'addTag' => __( 'Add Tag', 'tags-for-anspress' ),
+			'tagAdded' => __( 'added to the tags list.', 'tags-for-anspress' ),
+			'tagRemoved' => __( 'removed from the tags list.', 'tags-for-anspress' ),
+			'suggestionsAvailable' => __( 'Suggestions are available. Use the up and down arrow keys to read it.', 'tags-for-anspress' )
+		);
+		 
+		wp_localize_script(
+			'tags_js',
+			'apTagsTranslation',
+			$l10n_data
+		);
 	}
 
 	/**
@@ -455,21 +476,30 @@ class Tags_For_AnsPress
 
 		$tag_val = $editing ? $tags :  $_POST['tags'];
 
-		$tag_field = '<div class="ap-field-tags ap-form-fields"><label class="ap-form-label" for="tags">'.__('Tags', 'tags-for-anspress').'</label>';
-		$tag_field .= '<div data-role="ap-tagsinput" class="ap-tags-input">';
-		$tag_field .= '<span id="ap-tags-holder">';
+		$tag_field = '<div class="ap-field-tags ap-form-fields">';
+			
+			$tag_field .= '<label class="ap-form-label" for="tags">'.__('Tags', 'tags-for-anspress').'</label>';
 
-		if(!empty($tag_val) && is_array($tag_val)){
-			foreach($tag_val as $tag){
-				$tag_field .= '<span class="ap-tagssugg-item" title="'. $tag->description .'">'. $tag->slug .'<i class="ap-tag-remove">&times;</i><input type="hidden" name="tags[]" value="'. $tag->slug .'" /></span>';
-			}
-		}
+			$tag_field .= '<div data-role="ap-tagsinput" class="ap-tags-input">';
+				
+				$tag_field .= '<div id="ap-tags-add">';
+					$tag_field .= '<input id="tags" class="ap-tags-field ap-form-control" placeholder="'.__('Type and hit enter', 'tags-for-anspress').'" autocomplete="off" />';
+					$tag_field .= '<ul id="ap-tags-suggestion">';
+					$tag_field .= '</ul>';
+				$tag_field .= '</div>';
+				
+				$tag_field .= '<ul id="ap-tags-holder" aria-describedby="ap-tags-list-title">';
+				if(!empty($tag_val) && is_array($tag_val)){
+					foreach($tag_val as $tag){
+						$tag_field .= '<li class="ap-tagssugg-item"><button role="button" class="ap-tag-remove"><span class="sr-only"></span> <span class="ap-tag-item-value">'. $tag .'</span><i class="apicon-x"></i></button><input type="hidden" name="tags[]" value="'. $tag .'" /></li>';
+					}
+				}
+				$tag_field .= '</ul>';
 
-		$tag_field .= '</span>';
-		$tag_field .= '<input id="tags" class="ap-tags-field ap-form-control" placeholder="'.__('Type and hit enter', 'tags-for-anspress').'" />';
-		$tag_field .= '<div id="ap-tags-suggestion">';
+			$tag_field .= '</div>';
+
 		$tag_field .= '</div>';
-		$tag_field .= '</div></div>';
+
 
 		$args['fields'][] = array(
 			'name' 		=> 'tag',
