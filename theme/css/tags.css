@@ -178,6 +178,7 @@
 #anspress #ap-tags-holder li button {
   background: #f8f8f8 none repeat scroll 0 0;
   border: 2px solid #ddd;
+  color: #333333;
 }
 #anspress #ap-tags-holder li button > span {
   margin-right: 5px;
@@ -204,6 +205,7 @@
   border-radius: 0px;
   margin-bottom: 0px;
   border-width: 0 1px 0 2px;
+  color: #333333;
 }
 .sr-only {
   position: absolute;
