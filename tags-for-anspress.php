@@ -491,7 +491,7 @@ class Tags_For_AnsPress
 				$tag_field .= '<ul id="ap-tags-holder" aria-describedby="ap-tags-list-title">';
 				if(!empty($tag_val) && is_array($tag_val)){
 					foreach($tag_val as $tag){
-						$tag_field .= '<li class="ap-tagssugg-item"><button role="button" class="ap-tag-remove"><span class="sr-only"></span> <span class="ap-tag-item-value">'. $tag .'</span><i class="apicon-x"></i></button><input type="hidden" name="tags[]" value="'. $tag .'" /></li>';
+						$tag_field .= '<li class="ap-tagssugg-item"><button role="button" class="ap-tag-remove"><span class="sr-only"></span> <span class="ap-tag-item-value">'. $tag->slug .'</span><i class="apicon-x"></i></button><input type="hidden" name="tags[]" value="'. $tag->slug .'" /></li>';
 					}
 				}
 				$tag_field .= '</ul>';
