@@ -116,6 +116,7 @@ class Tags_For_AnsPress
 		add_filter( 'ap_default_pages', array( $this, 'tags_default_page' ) );
 		add_filter( 'ap_default_page_slugs', array( $this, 'default_page_slugs' ) );
 		add_filter( 'ap_subscribe_btn_type', array( $this, 'subscribe_type' ) );
+		add_filter( 'ap_subscribe_btn_action_type', array( $this, 'subscribe_btn_action_type' ) );
 	}
 
 	/**
@@ -739,6 +740,16 @@ class Tags_For_AnsPress
 			$subscribe_type =  'tag';
 		else
 			return $type;
+	}
+
+	public function subscribe_btn_action_type($args){
+		if ( is_question_tag() ) {
+			global $question_tag;
+			$args['action_id'] 	= $question_tag->term_id;
+			$args['type'] 		= 'tag';
+		}
+
+		return $args;
 	}
 
 }
