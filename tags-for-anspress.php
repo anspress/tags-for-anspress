@@ -524,7 +524,7 @@ class Tags_For_AnsPress
 	public function ap_ask_fields_validation($args) {
 		$args['tags'] = array(
 			'sanitize' => array( 'sanitize_tags' ),
-			'validate' => array( 'required', 'comma_separted_count' => ap_opt( 'min_tags' ) ),
+			'validate' => array( 'comma_separted_count' => ap_opt( 'min_tags' ) ),
 		);
 
 		return $args;
