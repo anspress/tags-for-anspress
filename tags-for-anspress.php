@@ -138,13 +138,13 @@ class Tags_For_AnsPress
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'question_tag',
-					'field' => is_numeric( $tag_id ) ? 'id' : 'slug',
+					'field' => 'slug',
 					'terms' => array( $tag_id ),
 				),
 			),
 		);
 
-		$question_tag       = get_term_by( is_numeric( $tag_id ) ? 'id' : 'slug', $tag_id, 'question_tag' );
+		$question_tag       = get_term_by('slug', $tag_id, 'question_tag' );
 
 		if ( $question_tag ) {
 			$questions = ap_get_questions( $question_args );
@@ -562,7 +562,7 @@ class Tags_For_AnsPress
 			$title = ap_opt('tags_page_title');
 		}elseif ( is_question_tag() ) {
 			$tag_id = sanitize_title( get_query_var( 'q_tag' ) );
-			$tag = get_term_by( is_numeric( $tag_id ) ? 'id' : 'slug', $tag_id, 'question_tag' );
+			$tag = get_term_by( 'slug', $tag_id, 'question_tag' );
 			$title = $tag->name;
 		}
 
@@ -572,7 +572,7 @@ class Tags_For_AnsPress
 	public function ap_breadcrumbs($navs) {
 		if ( is_question_tag() ) {
 			$tag_id = sanitize_title( get_query_var( 'q_tag' ) );
-			$tag = get_term_by( is_numeric( $tag_id ) ? 'id' : 'slug', $tag_id, 'question_tag' );
+			$tag = get_term_by( 'slug', $tag_id, 'question_tag' );
 			$navs['page'] = array();
 			$navs['tag'] = array( 'title' => $tag->name, 'link' => get_term_link( $tag, 'question_tag' ), 'order' => 8 );
 		} elseif ( is_question_tags() ) {
@@ -658,7 +658,8 @@ class Tags_For_AnsPress
 		}
 
 		if ( isset( $_GET['ap_s'] ) ) {
-			$tag_args['search'] = sanitize_text_field( $_GET['ap_s'] ); }
+			$tag_args['search'] = sanitize_text_field( $_GET['ap_s'] );
+		}
 
 		$question_tags = get_terms( 'question_tag' , $tag_args );
 
