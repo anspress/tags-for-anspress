@@ -3,7 +3,7 @@ Contributors: nerdaryan
 Donate link: https://www.paypal.com/cgi-bin/webscr?business=rah12@live.com&cmd=_xclick&item_name=Donation%20to%20AnsPress%20development
 Tags: anspress, question, answer, tags, q&a, forum, stackoverflow, quora
 Requires at least: 4.1.1
-Tested up to: 4.2
+Tested up to: 4.4
 Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -31,6 +31,24 @@ Or if you want to install it manually simple follow this:
 
 
 == Changelog ==
+
+= 1.5 =
+* Fix: error 404 when tag is numeric
+* Fix: Don't check minimum characters when it is zero
+* Fix: not accepting utf8 words
+* Language: Added de_DE
+* Fix: subscribe button
+* New: Added color for tags button
+* New: Rebuild + Keyboard navigation + Accessibility + JS Translation
+* Fix: Tags field fix
+* Language: Added Turkish language
+* Fix: Set subscribe button type
+* New: Option to change tag path string
+* New: Duplicate check of tags
+* New: Improved tags suggestion
+* Language: Updated French .mo
+* New: Added ap-tags position
+* Fix: pagination
 
 = 1.2.4 =
 * fixed ajax suggestion in ask form
