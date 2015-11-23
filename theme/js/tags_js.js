@@ -175,20 +175,16 @@
 			e.preventDefault();
 			var val = $(this).val().trim();
 			clearTimeout(window.tagtime);
-			if(val.length > 1) {
-				if(e.keyCode != 9 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) { // Do nothing on Tab and arrows keys
-					if(e.keyCode == 13 || e.keyCode == 188 ) { // "Enter" or ","
-						clearTimeout(window.tagtime);
-						$(this).trigger('apAddNewTag');
-					} else {
-						$(this).attr('data-original-value', $(this).val());
-						window.tagtime = setTimeout(function() {
-							apTagsSuggestion(val);
-						}, 200);
-					}
+			if(e.keyCode != 9 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) { // Do nothing on Tab and arrows keys
+				if(e.keyCode == 13 || e.keyCode == 188 ) { // "Enter" or ","
+					clearTimeout(window.tagtime);
+					$(this).trigger('apAddNewTag');
+				} else {
+					$(this).attr('data-original-value', $(this).val());
+					window.tagtime = setTimeout(function() {
+						apTagsSuggestion(val);
+					}, 200);
 				}
-			} else {
-				$('#ap-tags-suggestion').hide();
 			}
 		});
 		

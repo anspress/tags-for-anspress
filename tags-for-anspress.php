@@ -202,7 +202,7 @@ class Tags_For_AnsPress
 		$question_tags = get_terms( 'question_tag' , $tag_args );
 
 		$total_terms        = $tags_rows_found;
-		$ap_max_num_pages   = ceil( $total_terms / $per_page );
+		$ap_max_num_pages   = ceil( @$total_terms / @$per_page );
 
 		include ap_get_theme_location( 'tags.php', TAGS_FOR_ANSPRESS_DIR );
 	}
