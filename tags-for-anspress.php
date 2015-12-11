@@ -167,6 +167,7 @@ class Tags_For_AnsPress
 
 		$paged              = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 		$per_page           = ap_opt( 'tags_per_page' );
+		$per_page           = $per_page == 0 ? 1 : $per_page;
 		$offset             = $per_page * ( $paged - 1) ;
 
 		$tag_args = array(
@@ -765,7 +766,7 @@ class Tags_For_AnsPress
  */
 
 function tags_for_anspress() {
-	$discounts = new Tags_For_AnsPress();
+	$ap_tags = new Tags_For_AnsPress();
 }
 add_action( 'plugins_loaded', 'tags_for_anspress' );
 
