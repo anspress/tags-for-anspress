@@ -29,9 +29,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if(!version_compare(AP_VERSION, '2.3', '>')){
+if ( ! version_compare(AP_VERSION, '2.3', '>' ) ) {
 	function ap_tag_admin_error_notice() {
-	    echo '<div class="update-nag error"> <p>'.sprintf(__('Tags extension require AnsPress 2.4-RC or above. Download from Github %shttp://github.com/anspress/anspress%s', 'tags-for-anspress'), '<a target="_blank" href="http://github.com/anspress/anspress">', '</a>').'</p></div>';
+	    echo '<div class="update-nag error"> <p>'.sprintf(__('Tags extension require AnsPress 2.4-RC or above. Download from Github %shttp://github.com/anspress/anspress%s', 'tags-for-anspress' ), '<a target="_blank" href="http://github.com/anspress/anspress">', '</a>' ).'</p></div>';
 	}
 	add_action( 'admin_notices', 'ap_tag_admin_error_notice' );
 	return;
@@ -110,13 +110,14 @@ class Tags_For_AnsPress
 		add_filter( 'get_terms', array( $this, 'get_terms' ), 10, 3 );
 		add_action( 'ap_user_subscription_tab', array( $this, 'subscription_tab' ) );
 		add_action( 'ap_user_subscription_page', array( $this, 'subscription_page' ) );
-		add_action( 'wp_ajax_ap_tags_suggestion', array( $this, 'ap_tags_suggestion') );
-	    add_action( 'wp_ajax_nopriv_ap_tags_suggestion', array( $this, 'ap_tags_suggestion') );
+		add_action( 'wp_ajax_ap_tags_suggestion', array( $this, 'ap_tags_suggestion' ) );
+	    add_action( 'wp_ajax_nopriv_ap_tags_suggestion', array( $this, 'ap_tags_suggestion' ) );
 	    add_action( 'ap_rewrite_rules', array( $this, 'rewrite_rules' ), 10, 3 );
 		add_filter( 'ap_default_pages', array( $this, 'tags_default_page' ) );
 		add_filter( 'ap_default_page_slugs', array( $this, 'default_page_slugs' ) );
 		add_filter( 'ap_subscribe_btn_type', array( $this, 'subscribe_type' ) );
 		add_filter( 'ap_subscribe_btn_action_type', array( $this, 'subscribe_btn_action_type' ) );
+		add_filter( 'ap_current_page_is', array( $this, 'ap_current_page_is' ) );
 	}
 
 	/**
@@ -309,7 +310,7 @@ class Tags_For_AnsPress
 
 		$defaults['max_tags']       	= 5;
 		$defaults['min_tags']       	= 1;
-		$defaults['tags_page_title']   	= __('Tags', 'tags-for-anspress');
+		$defaults['tags_page_title']   	= __('Tags', 'tags-for-anspress' );
 		$defaults['tags_per_page']   	= 20;
 		$defaults['tags_page_slug']   	= 'tags';
 		$defaults['tag_page_slug']   	= 'tag';
@@ -415,7 +416,7 @@ class Tags_For_AnsPress
 			echo '<div class="ap-post-tags clearfix">'. ap_question_tags_html( array( 'list' => true, 'label' => '' ) ) .'</div></div>';
 		}
 	}
-	
+
 	/**
 	 * Enqueue scripts
 	 * @since 1.0
@@ -424,7 +425,7 @@ class Tags_For_AnsPress
 		wp_enqueue_script( 'tags_js', ap_get_theme_url( 'js/tags_js.js', TAGS_FOR_ANSPRESS_URL ) );
 		wp_enqueue_style( 'tags_css', ap_get_theme_url( 'css/tags.css', TAGS_FOR_ANSPRESS_URL ) );
 	}
-	
+
 	/**
 	 * Add translated strings to the javascript files
 	 * @since 1.0
@@ -435,9 +436,9 @@ class Tags_For_AnsPress
 			'addTag' => __( 'Add Tag', 'tags-for-anspress' ),
 			'tagAdded' => __( 'added to the tags list.', 'tags-for-anspress' ),
 			'tagRemoved' => __( 'removed from the tags list.', 'tags-for-anspress' ),
-			'suggestionsAvailable' => __( 'Suggestions are available. Use the up and down arrow keys to read it.', 'tags-for-anspress' )
+			'suggestionsAvailable' => __( 'Suggestions are available. Use the up and down arrow keys to read it.', 'tags-for-anspress' ),
 		);
-		 
+
 		wp_localize_script(
 			'tags_js',
 			'apTagsTranslation',
@@ -479,29 +480,28 @@ class Tags_For_AnsPress
 		$tag_val = $editing ? $tags :  $_POST['tags'];
 
 		$tag_field = '<div class="ap-field-tags ap-form-fields">';
-			
-			$tag_field .= '<label class="ap-form-label" for="tags">'.__('Tags', 'tags-for-anspress').'</label>';
+
+			$tag_field .= '<label class="ap-form-label" for="tags">'.__('Tags', 'tags-for-anspress' ).'</label>';
 
 			$tag_field .= '<div data-role="ap-tagsinput" class="ap-tags-input">';
-				
+
 				$tag_field .= '<div id="ap-tags-add">';
-					$tag_field .= '<input id="tags" class="ap-tags-field ap-form-control" placeholder="'.__('Type and hit enter', 'tags-for-anspress').'" autocomplete="off" />';
+					$tag_field .= '<input id="tags" class="ap-tags-field ap-form-control" placeholder="'.__('Type and hit enter', 'tags-for-anspress' ).'" autocomplete="off" />';
 					$tag_field .= '<ul id="ap-tags-suggestion">';
 					$tag_field .= '</ul>';
 				$tag_field .= '</div>';
-				
+
 				$tag_field .= '<ul id="ap-tags-holder" aria-describedby="ap-tags-list-title">';
-				if(!empty($tag_val) && is_array($tag_val)){
-					foreach($tag_val as $tag){
-						$tag_field .= '<li class="ap-tagssugg-item"><button role="button" class="ap-tag-remove"><span class="sr-only"></span> <span class="ap-tag-item-value">'. $tag->slug .'</span><i class="apicon-x"></i></button><input type="hidden" name="tags[]" value="'. $tag->slug .'" /></li>';
-					}
-				}
+		if ( ! empty($tag_val ) && is_array($tag_val ) ) {
+			foreach ( $tag_val as $tag ) {
+				$tag_field .= '<li class="ap-tagssugg-item"><button role="button" class="ap-tag-remove"><span class="sr-only"></span> <span class="ap-tag-item-value">'. $tag->slug .'</span><i class="apicon-x"></i></button><input type="hidden" name="tags[]" value="'. $tag->slug .'" /></li>';
+			}
+		}
 				$tag_field .= '</ul>';
 
 			$tag_field .= '</div>';
 
 		$tag_field .= '</div>';
-
 
 		$args['fields'][] = array(
 			'name' 		=> 'tag',
@@ -548,7 +548,7 @@ class Tags_For_AnsPress
 
 		$fields = $validate->get_sanitized_fields();
 		if ( isset( $fields['tags'] ) ) {
-			$tags = explode(',', $fields['tags']);
+			$tags = explode(',', $fields['tags'] );
 			wp_set_object_terms( $post_id, $tags, 'question_tag' );
 		}
 	}
@@ -560,8 +560,8 @@ class Tags_For_AnsPress
 	 */
 	public function page_title($title) {
 		if ( is_question_tags() ) {
-			$title = ap_opt('tags_page_title');
-		}elseif ( is_question_tag() ) {
+			$title = ap_opt('tags_page_title' );
+		} elseif ( is_question_tag() ) {
 			$tag_id = sanitize_title( get_query_var( 'q_tag' ) );
 			$tag = get_term_by( 'slug', $tag_id, 'question_tag' );
 			$title = $tag->name;
@@ -738,13 +738,12 @@ class Tags_For_AnsPress
 	}
 
 	public function subscribe_type($type) {
-		if(is_question_tag())
-			$subscribe_type =  'tag';
-		else
-			return $type;
+		if ( is_question_tag() ) {
+			$subscribe_type = 'tag'; } else {
+			return $type; }
 	}
 
-	public function subscribe_btn_action_type($args){
+	public function subscribe_btn_action_type($args) {
 		if ( is_question_tag() ) {
 			global $question_tag;
 			$args['action_id'] 	= $question_tag->term_id;
@@ -752,6 +751,21 @@ class Tags_For_AnsPress
 		}
 
 		return $args;
+	}
+
+	/**
+	 * Override ap_current_page_is function to check if tags or tag page.
+	 * @param  string $page Current page slug.
+	 * @return string
+	 */
+	public function ap_current_page_is($page) {
+		if ( is_question_tags() ) {
+			$template = 'tags';
+		} elseif ( is_question_tag() ) {
+			$template = 'tag';
+		}
+
+		return $page;
 	}
 
 }
