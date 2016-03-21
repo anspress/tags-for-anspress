@@ -15,7 +15,7 @@
  * Plugin URI:        http://anspress.io/tags-for-anspress
  * Description:       Extension for AnsPress. Add tags in AnsPress.
  * Donate link: https://www.paypal.com/cgi-bin/webscr?business=rah12@live.com&cmd=_xclick&item_name=Donation%20to%20AnsPress%20development
- * Version:           1.5.2
+ * Version:           2.0.0
  * Author:            Rahul Aryan
  * Author URI:        http://anspress.io
  * Text Domain:       ap
@@ -27,14 +27,6 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
-}
-
-if ( ! version_compare(AP_VERSION, '2.3', '>' ) ) {
-	function ap_tag_admin_error_notice() {
-	    echo '<div class="update-nag error"> <p>'.sprintf(__('Tags extension require AnsPress 2.4-RC or above. Download from Github %shttp://github.com/anspress/anspress%s', 'tags-for-anspress' ), '<a target="_blank" href="http://github.com/anspress/anspress">', '</a>' ).'</p></div>';
-	}
-	add_action( 'admin_notices', 'ap_tag_admin_error_notice' );
-	return;
 }
 
 class Tags_For_AnsPress
@@ -74,14 +66,6 @@ class Tags_For_AnsPress
 			return; // AnsPress not installed.
 		}
 
-		if ( ! defined( 'TAGS_FOR_ANSPRESS_DIR' ) ) {
-			define( 'TAGS_FOR_ANSPRESS_DIR', plugin_dir_path( __FILE__ ) );
-		}
-
-		if ( ! defined( 'TAGS_FOR_ANSPRESS_URL' ) ) {
-			define( 'TAGS_FOR_ANSPRESS_URL', plugin_dir_url( __FILE__ ) );
-		}
-
 		$this->includes();
 
 		ap_register_page( ap_get_tag_slug(), __( 'Tag', 'tags-for-anspress' ), array( $this, 'tag_page' ), false );
@@ -92,7 +76,6 @@ class Tags_For_AnsPress
 		add_action( 'widgets_init', array( $this, 'widget_positions' ) );
 
 		add_action( 'init', array( $this, 'register_question_tag' ), 1 );
-		add_filter( 'ap_default_options', array( $this, 'ap_default_options' ) );
 		add_action( 'ap_admin_menu', array( $this, 'admin_tags_menu' ) );
 		add_action( 'ap_display_question_metas', array( $this, 'ap_display_question_metas' ), 10, 2 );
 		add_action( 'ap_question_info', array( $this, 'ap_question_info' ) );
@@ -124,6 +107,13 @@ class Tags_For_AnsPress
 	 * Include required files
 	 */
 	public function includes() {
+		if ( ! defined( 'TAGS_FOR_ANSPRESS_DIR' ) ) {
+			define( 'TAGS_FOR_ANSPRESS_DIR', plugin_dir_path( __FILE__ ) );
+		}
+
+		if ( ! defined( 'TAGS_FOR_ANSPRESS_URL' ) ) {
+			define( 'TAGS_FOR_ANSPRESS_URL', plugin_dir_url( __FILE__ ) );
+		}
 		require_once( TAGS_FOR_ANSPRESS_DIR . 'functions.php' );
 	}
 
@@ -131,7 +121,6 @@ class Tags_For_AnsPress
 	 * Tag page layout.
 	 */
 	public function tag_page() {
-
 		global $questions, $question_tag;
 		$tag_id = sanitize_title( get_query_var( 'q_tag' ) );
 
@@ -165,7 +154,6 @@ class Tags_For_AnsPress
 	public function tags_page() {
 
 		global $question_tags, $ap_max_num_pages, $ap_per_page, $tags_rows_found;
-
 		$paged              = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 		$per_page           = ap_opt( 'tags_per_page' );
 		$per_page           = $per_page == 0 ? 1 : $per_page;
@@ -306,7 +294,7 @@ class Tags_For_AnsPress
 	 * @return  array
 	 * @since   1.0
 	 */
-	public function ap_default_options($defaults) {
+	public static function ap_default_options($defaults) {
 
 		$defaults['max_tags']       	= 5;
 		$defaults['min_tags']       	= 1;
@@ -477,7 +465,7 @@ class Tags_For_AnsPress
 			$tags = get_the_terms( $editing_post->ID, 'question_tag' );
 		}
 
-		$tag_val = $editing ? $tags :  $_POST['tags'];
+		$tag_val = $editing ? @$tags :  $_POST['tags'];
 
 		$tag_field = '<div class="ap-field-tags ap-form-fields">';
 
@@ -780,9 +768,26 @@ class Tags_For_AnsPress
  */
 
 function tags_for_anspress() {
-	if( apply_filters( 'anspress_load_ext', true, 'tags-for-anspress' ) ){
+	if ( ! version_compare(AP_VERSION, '2.3', '>' ) ) {
+		function ap_tag_admin_error_notice() {
+		    echo '<div class="update-nag error"> <p>'.sprintf(__('Tags extension require AnsPress 2.4-RC or above. Download from Github %shttp://github.com/anspress/anspress%s', 'tags-for-anspress' ), '<a target="_blank" href="http://github.com/anspress/anspress">', '</a>' ).'</p></div>';
+		}
+		add_action( 'admin_notices', 'ap_tag_admin_error_notice' );
+		return;
+	}
+
+	if ( apply_filters( 'anspress_load_ext', true, 'tags-for-anspress' ) ) {
 		$ap_tags = new Tags_For_AnsPress();
 	}
 }
 add_action( 'plugins_loaded', 'tags_for_anspress' );
 
+/**
+ * Load extensions files before loading AnsPress
+ * @return void
+ * @since  1.0
+ */
+function anspress_loaded_tags_for_anspress() {	
+	add_filter( 'ap_default_options', array( 'Tags_For_AnsPress', 'ap_default_options' ) );
+}
+add_action( 'before_loading_anspress', 'anspress_loaded_tags_for_anspress' );

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?business=rah12@live.com&cmd=_
 Tags: anspress, question, answer, tags, q&a, forum, stackoverflow, quora
 Requires at least: 4.1.1
 Tested up to: 4.4
-Stable tag: 1.5.2
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Or if you want to install it manually simple follow this:
 
 
 == Changelog ==
+
+= 2.0.0 =
+* Improved loading order of extension
 
 = 1.5.1 =
 * Minor bug fixes
