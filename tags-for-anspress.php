@@ -5,7 +5,7 @@
  * AnsPress - Question and answer plugin for WordPress
  *
  * @package   Tags for AnsPress
- * @author    Rahul Aryan <wp3@rahularyan.com>
+ * @author    Rahul Aryan <support@anspress.io>
  * @license   GPL-2.0+
  * @link      http://anspress.io/tags-for-anspress
  * @copyright 2014 anspress.io & Rahul Aryan
