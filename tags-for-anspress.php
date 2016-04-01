@@ -71,7 +71,7 @@ class Tags_For_AnsPress
 		ap_register_page( ap_get_tag_slug(), __( 'Tag', 'tags-for-anspress' ), array( $this, 'tag_page' ), false );
 		ap_register_page( ap_get_tags_slug(), __( 'Tags', 'tags-for-anspress' ), array( $this, 'tags_page' ) );
 
-		add_action( 'admin_init', array( $this, 'load_options' ) );
+		add_action( 'ap_option_groups', array( $this, 'option_fields' ) );
 		add_action( 'init', array( $this, 'textdomain' ) );
 		add_action( 'widgets_init', array( $this, 'widget_positions' ) );
 
@@ -195,10 +195,6 @@ class Tags_For_AnsPress
 		$ap_max_num_pages   = ceil( @$total_terms / @$per_page );
 
 		include ap_get_theme_location( 'tags.php', TAGS_FOR_ANSPRESS_DIR );
-	}
-
-	public function load_options() {
-		$this->option_fields();
 	}
 
 	/**
@@ -465,14 +461,12 @@ class Tags_For_AnsPress
 			$tags = get_the_terms( $editing_post->ID, 'question_tag' );
 		}
 
-		$tag_val = $editing ? @$tags :  $_POST['tags'];
+		$tags_post = isset( $_POST['tags'] ) ? $_POST['tags'] : '';
+		$tag_val = $editing ? $tags : $tags_post;
 
 		$tag_field = '<div class="ap-field-tags ap-form-fields">';
-
 			$tag_field .= '<label class="ap-form-label" for="tags">'.__('Tags', 'tags-for-anspress' ).'</label>';
-
 			$tag_field .= '<div data-role="ap-tagsinput" class="ap-tags-input">';
-
 				$tag_field .= '<div id="ap-tags-add">';
 					$tag_field .= '<input id="tags" class="ap-tags-field ap-form-control" placeholder="'.__('Type and hit enter', 'tags-for-anspress' ).'" autocomplete="off" />';
 					$tag_field .= '<ul id="ap-tags-suggestion">';
@@ -480,8 +474,8 @@ class Tags_For_AnsPress
 				$tag_field .= '</div>';
 
 				$tag_field .= '<ul id="ap-tags-holder" aria-describedby="ap-tags-list-title">';
-		if ( ! empty($tag_val ) && is_array($tag_val ) ) {
-			foreach ( $tag_val as $tag ) {
+		foreach ( (array) $tag_val as $tag ) {
+			if( !empty( $tag->slug ) ){
 				$tag_field .= '<li class="ap-tagssugg-item"><button role="button" class="ap-tag-remove"><span class="sr-only"></span> <span class="ap-tag-item-value">'. $tag->slug .'</span><i class="apicon-x"></i></button><input type="hidden" name="tags[]" value="'. $tag->slug .'" /></li>';
 			}
 		}
@@ -787,7 +781,7 @@ add_action( 'plugins_loaded', 'tags_for_anspress' );
  * @return void
  * @since  1.0
  */
-function anspress_loaded_tags_for_anspress() {	
+function anspress_loaded_tags_for_anspress() {
 	add_filter( 'ap_default_options', array( 'Tags_For_AnsPress', 'ap_default_options' ) );
 }
 add_action( 'before_loading_anspress', 'anspress_loaded_tags_for_anspress' );
