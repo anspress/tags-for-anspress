@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/anspress-question-answer\n"
-"POT-Creation-Date: 2016-03-26 14:51:03+00:00\n"
+"POT-Creation-Date: 2016-04-02 03:50:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,10 +33,10 @@ msgstr ""
 msgid "Questions"
 msgstr ""
 
-#: functions.php:130 tags-for-anspress.php:72 tags-for-anspress.php:301
-#: tags-for-anspress.php:315 tags-for-anspress.php:328
-#: tags-for-anspress.php:403 tags-for-anspress.php:472
-#: tags-for-anspress.php:496
+#: functions.php:130 tags-for-anspress.php:72 tags-for-anspress.php:297
+#: tags-for-anspress.php:311 tags-for-anspress.php:324
+#: tags-for-anspress.php:399 tags-for-anspress.php:468
+#: tags-for-anspress.php:490
 msgid "Tags"
 msgstr ""
 
@@ -52,135 +52,135 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: tags-for-anspress.php:71 tags-for-anspress.php:610
+#: tags-for-anspress.php:71 tags-for-anspress.php:604
 msgid "Tag"
 msgstr ""
 
-#: tags-for-anspress.php:225
+#: tags-for-anspress.php:221
 msgid "AP Tags"
 msgstr ""
 
-#: tags-for-anspress.php:229
+#: tags-for-anspress.php:225
 msgid "Widgets in this area will be shown in anspress tags page."
 msgstr ""
 
-#: tags-for-anspress.php:248
+#: tags-for-anspress.php:244
 msgid "Question Tags"
 msgstr ""
 
-#: tags-for-anspress.php:250
+#: tags-for-anspress.php:246
 msgid "All Tags"
 msgstr ""
 
-#: tags-for-anspress.php:252
+#: tags-for-anspress.php:248
 msgid "Edit Tag"
 msgstr ""
 
-#: tags-for-anspress.php:253
+#: tags-for-anspress.php:249
 msgid "New Tag"
 msgstr ""
 
-#: tags-for-anspress.php:254
+#: tags-for-anspress.php:250
 msgid "View Tag"
 msgstr ""
 
-#: tags-for-anspress.php:255
+#: tags-for-anspress.php:251
 msgid "Search Tag"
 msgstr ""
 
-#: tags-for-anspress.php:256
+#: tags-for-anspress.php:252
 msgid "Nothing Found"
 msgstr ""
 
-#: tags-for-anspress.php:257
+#: tags-for-anspress.php:253
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: tags-for-anspress.php:315
+#: tags-for-anspress.php:311
 msgid "Questions Tags"
 msgstr ""
 
-#: tags-for-anspress.php:331
+#: tags-for-anspress.php:327
 msgid "Tags to show"
 msgstr ""
 
-#: tags-for-anspress.php:332
+#: tags-for-anspress.php:328
 msgid "Numbers of tags to show in tags page."
 msgstr ""
 
-#: tags-for-anspress.php:338
+#: tags-for-anspress.php:334
 msgid "Maximum tags"
 msgstr ""
 
-#: tags-for-anspress.php:339
+#: tags-for-anspress.php:335
 msgid "Maximum numbers of tags that user can add when asking."
 msgstr ""
 
-#: tags-for-anspress.php:345
+#: tags-for-anspress.php:341
 msgid "Minimum tags"
 msgstr ""
 
-#: tags-for-anspress.php:346
+#: tags-for-anspress.php:342
 msgid "minimum numbers of tags that user must add when asking."
 msgstr ""
 
-#: tags-for-anspress.php:352
+#: tags-for-anspress.php:348
 msgid "Tags page title"
 msgstr ""
 
-#: tags-for-anspress.php:353
+#: tags-for-anspress.php:349
 msgid "Title for tags page"
 msgstr ""
 
-#: tags-for-anspress.php:360
+#: tags-for-anspress.php:356
 msgid "Tags page slug"
 msgstr ""
 
-#: tags-for-anspress.php:361
+#: tags-for-anspress.php:357
 msgid "Slug tags page"
 msgstr ""
 
-#: tags-for-anspress.php:369
+#: tags-for-anspress.php:365
 msgid "Tag page slug"
 msgstr ""
 
-#: tags-for-anspress.php:370
+#: tags-for-anspress.php:366
 msgid "Slug for tag page"
 msgstr ""
 
-#: tags-for-anspress.php:423
+#: tags-for-anspress.php:419
 msgid "Delete Tag"
 msgstr ""
 
-#: tags-for-anspress.php:424
+#: tags-for-anspress.php:420
 msgid "Add Tag"
 msgstr ""
 
-#: tags-for-anspress.php:425
+#: tags-for-anspress.php:421
 msgid "added to the tags list."
 msgstr ""
 
-#: tags-for-anspress.php:426
+#: tags-for-anspress.php:422
 msgid "removed from the tags list."
 msgstr ""
 
-#: tags-for-anspress.php:427
+#: tags-for-anspress.php:423
 msgid "Suggestions are available. Use the up and down arrow keys to read it."
 msgstr ""
 
-#: tags-for-anspress.php:477
+#: tags-for-anspress.php:471
 msgid "Type and hit enter"
 msgstr ""
 
-#: tags-for-anspress.php:499
+#: tags-for-anspress.php:493
 msgid "Slowly type for suggestions"
 msgstr ""
 
-#: tags-for-anspress.php:568
+#: tags-for-anspress.php:562
 msgid "Categories"
 msgstr ""
 
-#: tags-for-anspress.php:773
+#: tags-for-anspress.php:767
 msgid ""
 "Tags extension require AnsPress 2.4-RC or above. Download from Github "
 "%shttp://github.com/anspress/anspress%s"
@@ -218,12 +218,12 @@ msgstr[1] ""
 msgid "No description."
 msgstr ""
 
-#: tags-for-anspress.php:249
+#: tags-for-anspress.php:245
 msgctxt "tags-for-anspress"
 msgid "Tag"
 msgstr ""
 
-#: tags-for-anspress.php:251
+#: tags-for-anspress.php:247
 msgctxt "tags-for-anspress"
 msgid "Add New Tag"
 msgstr ""

@@ -35,7 +35,7 @@
 								<?php echo $tag->name; ?>
 							</a>
 							<span class="ap-term-count">
-								&times; <?php printf(_n('%d Question', '%d Questions', 'tags_for_anspress', $tag->count), $tag->count) ?>
+								&times; <?php printf(_n('%d Question', '%d Questions', $tag->count, 'tags-for-anspress'), $tag->count) ?>
 							</span>
 						</div>
 
@@ -44,7 +44,7 @@
 								if($tag->description != '')
 									echo $tag->description;
 								else
-									_e('No description.', 'tags_for_anspress');
+									_e('No description.', 'tags-for-anspress');
 							?>
 						</div>
 					</div>

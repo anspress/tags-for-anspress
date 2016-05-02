@@ -101,6 +101,9 @@ class Tags_For_AnsPress
 		add_filter( 'ap_subscribe_btn_type', array( $this, 'subscribe_type' ) );
 		add_filter( 'ap_subscribe_btn_action_type', array( $this, 'subscribe_btn_action_type' ) );
 		add_filter( 'ap_current_page_is', array( $this, 'ap_current_page_is' ) );
+		add_filter( 'ap_list_filters', array( $this, 'ap_list_filters' ) );
+		add_filter( 'ap_main_questions_args', array( __CLASS__, 'ap_main_questions_args' ) );
+		add_action( 'ap_list_filter_search_tag', array( __CLASS__, 'filter_search_tag' ) );
 	}
 
 	/**
@@ -749,7 +752,70 @@ class Tags_For_AnsPress
 
 		return $page;
 	}
+	/**
+	 * Filter main questions query args. Modify and add label args.
+	 * @param  array $args Questions args.
+	 * @return array
+	 */
+	public static function ap_main_questions_args( $args ) {
+		global $questions, $wp;
+		$query = $wp->query_vars;
 
+		$filters = ap_list_filters_get_active( 'label' );
+		$tags_operator = !empty( $wp->query_vars['ap_tags_operator'] ) ? $wp->query_vars['ap_tags_operator'] : 'IN';
+
+		if ( isset( $query['ap_tags'] ) && is_array( $query['ap_tags'] ) ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'question_tag',
+				'field'    => 'slug',
+				'terms'    => $query['ap_tags'],
+				'operator' => $tags_operator,
+			);
+		} elseif ( false !== $filters ) {
+			$filters = (array) wp_unslash( $filters );
+			$filters = array_map( 'sanitize_text_field', $filters );
+			$args['tax_query'][] = array(
+				'taxonomy' => 'question_tag',
+				'field'    => 'term_id',
+				'terms'    => $filters,
+			);
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Add tags sorting in list filters
+	 * @return array
+	 */
+	public static function ap_list_filters( $filters ) {
+		global $wp;
+
+		if ( ! isset( $wp->query_vars['ap_tags'] ) ) {
+			$filters['tag'] = array(
+				'title' => __( 'Tag', 'anspress-question-answer' ),
+				'items' => ap_get_tag_filter(),
+				'search' => true,
+				'multiple' => true,
+			);
+		}
+
+		return $filters;
+	}
+
+	/**
+	 * Send ajax response for filter search.
+	 * @param  string $search_query Search string.
+	 */
+	public static function filter_search_tag( $search_query ) {
+		ap_ajax_json( [
+			'apData' => array(
+			'filter' => 'tag',
+			'searchQuery' => $search_query,
+			'items' => ap_get_tag_filter( $search_query ),
+			),
+		] );
+	}
 }
 
 /**

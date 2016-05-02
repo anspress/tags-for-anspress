@@ -192,3 +192,41 @@ function ap_get_tags_slug() {
 	 */
 	return apply_filters( 'ap_tags_slug', $slug );
 }
+
+/**
+ * Return tags for sorting dropdown.
+ * @return array|boolean
+ */
+function ap_get_tag_filter( $search = false ) {
+	$args = array(
+		'hierarchical'      => false,
+		'hide_if_empty'     => true,
+		'number'            => 10,
+	);
+
+	if ( false !== $search ) {
+		$args['search'] = $search;
+	}
+
+	$terms = get_terms( 'question_tag', $args );
+	$selected = array();
+	if ( isset( $_GET['ap_filter'], $_GET['ap_filter']['tag'] ) ) {
+		$selected = (array) wp_unslash( $_GET['ap_filter']['tag'] );
+	}
+
+	if ( ! $terms ) {
+		return false;
+	}
+
+	$items = array();
+	foreach ( (array) $terms as $t ) {
+		$item = [ 'key' => $t->term_id, 'title' => $t->name ];
+		// Check if active.
+		if ( in_array( $t->term_id, $selected ) ) {
+			$item['active'] = true;
+		}
+		$items[] = $item;
+	}
+
+	return $items;
+}
