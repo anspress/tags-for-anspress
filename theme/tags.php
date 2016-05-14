@@ -34,7 +34,7 @@
 							<a class="term-title" href="<?php echo get_tag_link( $tag );?>">
 								<?php echo $tag->name; ?>
 							</a>
-							<span class="ap-term-count">
+							<span class="ap-tagq-count">
 								&times; <?php printf(_n('%d Question', '%d Questions', $tag->count, 'tags-for-anspress'), $tag->count) ?>
 							</span>
 						</div>

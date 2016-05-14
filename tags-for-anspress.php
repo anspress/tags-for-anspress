@@ -104,6 +104,7 @@ class Tags_For_AnsPress
 		add_filter( 'ap_list_filters', array( $this, 'ap_list_filters' ) );
 		add_filter( 'ap_main_questions_args', array( __CLASS__, 'ap_main_questions_args' ) );
 		add_action( 'ap_list_filter_search_tag', array( __CLASS__, 'filter_search_tag' ) );
+		add_filter( 'ap_question_subscribers_action_id', array( __CLASS__, 'subscribers_action_id' ) );
 	}
 
 	/**
@@ -761,7 +762,7 @@ class Tags_For_AnsPress
 		global $questions, $wp;
 		$query = $wp->query_vars;
 
-		$filters = ap_list_filters_get_active( 'label' );
+		$filters = ap_list_filters_get_active( 'tag' );
 		$tags_operator = !empty( $wp->query_vars['ap_tags_operator'] ) ? $wp->query_vars['ap_tags_operator'] : 'IN';
 
 		if ( isset( $query['ap_tags'] ) && is_array( $query['ap_tags'] ) ) {
@@ -815,6 +816,20 @@ class Tags_For_AnsPress
 			'items' => ap_get_tag_filter( $search_query ),
 			),
 		] );
+	}
+
+	/**
+	 * Subscriber action ID.
+	 * @param  integer $action_id Current action ID.
+	 * @return integer
+	 */
+	public static function subscribers_action_id( $action_id ) {
+		if ( is_question_tag() ) {
+			global $question_tag;
+			$action_id = $question_category->term_id;
+		}
+
+		return $action_id;
 	}
 }
 
