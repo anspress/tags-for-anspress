@@ -556,6 +556,11 @@ class Tags_For_AnsPress
 		return $title;
 	}
 
+	/**
+	 * Hook into AnsPress breadcrums to show tags page.
+	 * @param  array $navs Breadcrumbs navs.
+	 * @return array
+	 */
 	public function ap_breadcrumbs($navs) {
 		if ( is_question_tag() ) {
 			$tag_id = sanitize_title( get_query_var( 'q_tag' ) );
@@ -563,7 +568,7 @@ class Tags_For_AnsPress
 			$navs['page'] = array();
 			$navs['tag'] = array( 'title' => $tag->name, 'link' => get_term_link( $tag, 'question_tag' ), 'order' => 8 );
 		} elseif ( is_question_tags() ) {
-			$navs['page'] = array( 'title' => __( 'Categories', 'tags-for-anspress' ), 'link' => ap_get_link_to( 'categories' ), 'order' => 8 );
+			$navs['page'] = array( 'title' => __( 'Tags', 'tags-for-anspress' ), 'link' => ap_get_link_to( 'tags' ), 'order' => 8 );
 
 		}
 
