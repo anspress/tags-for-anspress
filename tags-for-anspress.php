@@ -71,7 +71,7 @@ class Tags_For_AnsPress
 		ap_register_page( ap_get_tag_slug(), __( 'Tag', 'tags-for-anspress' ), array( $this, 'tag_page' ), false );
 		ap_register_page( ap_get_tags_slug(), __( 'Tags', 'tags-for-anspress' ), array( $this, 'tags_page' ) );
 
-		add_action( 'ap_option_groups', array( $this, 'option_fields' ) );
+		add_action( 'ap_option_groups', array( $this, 'option_fields' ), 20 );
 		add_action( 'init', array( $this, 'textdomain' ) );
 		add_action( 'widgets_init', array( $this, 'widget_positions' ) );
 
@@ -158,10 +158,10 @@ class Tags_For_AnsPress
 	public function tags_page() {
 
 		global $question_tags, $ap_max_num_pages, $ap_per_page, $tags_rows_found;
-		$paged              = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+		$paged 				= max( 1, get_query_var( 'paged' ) );
 		$per_page           = ap_opt( 'tags_per_page' );
 		$per_page           = $per_page == 0 ? 1 : $per_page;
-		$offset             = $per_page * ( $paged - 1) ;
+		$offset             = $per_page * ( $paged - 1);
 
 		$tag_args = array(
 			'ap_tags_query' => 'num_rows',
@@ -193,9 +193,8 @@ class Tags_For_AnsPress
 		 */
 		$tag_args = apply_filters( 'ap_tags_shortcode_args', $tag_args );
 
-		$question_tags = get_terms( 'question_tag' , $tag_args );
-
-		$total_terms        = $tags_rows_found;
+		$question_tags 		= get_terms( 'question_tag' , $tag_args );
+		$total_terms        = wp_count_terms( 'question_tag', [ 'hide_empty' => false, 'parent' => 0 ] );
 		$ap_max_num_pages   = ceil( @$total_terms / @$per_page );
 
 		include ap_get_theme_location( 'tags.php', TAGS_FOR_ANSPRESS_DIR );
@@ -327,49 +326,43 @@ class Tags_For_AnsPress
 		$settings = ap_opt();
 		ap_register_option_group( 'tags', __( 'Tags', 'tags-for-anspress' ), array(
 			array(
-				'name'              => 'anspress_opt[tags_per_page]',
+				'name'              => 'tags_per_page',
 				'label'             => __( 'Tags to show', 'tags-for-anspress' ),
 				'description'       => __( 'Numbers of tags to show in tags page.', 'tags-for-anspress' ),
 				'type'              => 'number',
-				'value'             => $settings['tags_per_page'],
 			),
 			array(
-				'name'              => 'anspress_opt[max_tags]',
+				'name'              => 'max_tags',
 				'label'             => __( 'Maximum tags', 'tags-for-anspress' ),
 				'description'       => __( 'Maximum numbers of tags that user can add when asking.', 'tags-for-anspress' ),
 				'type'              => 'number',
-				'value'             => $settings['max_tags'],
 			),
 			array(
-				'name'              => 'anspress_opt[min_tags]',
+				'name'              => 'min_tags',
 				'label'             => __( 'Minimum tags', 'tags-for-anspress' ),
 				'description'       => __( 'minimum numbers of tags that user must add when asking.', 'tags-for-anspress' ),
 				'type'              => 'number',
-				'value'             => $settings['min_tags'],
 			),
 			array(
-				'name' 		=> 'anspress_opt[tags_page_title]',
+				'name' 		=> 'tags_page_title',
 				'label' 	=> __( 'Tags page title', 'tags-for-anspress' ),
 				'desc' 		=> __( 'Title for tags page', 'tags-for-anspress' ),
 				'type' 		=> 'text',
-				'value' 	=> $settings['tags_page_title'],
 				'show_desc_tip' => false,
 			),
 			array(
-				'name' 		=> 'anspress_opt[tags_page_slug]',
+				'name' 		=> 'tags_page_slug',
 				'label' 	=> __( 'Tags page slug', 'tags-for-anspress' ),
 				'desc' 		=> __( 'Slug tags page', 'tags-for-anspress' ),
 				'type' 		=> 'text',
-				'value' 	=> $settings['tags_page_slug'],
 				'show_desc_tip' => false,
 			),
 
 			array(
-				'name' 		=> 'anspress_opt[tag_page_slug]',
+				'name' 		=> 'tag_page_slug',
 				'label' 	=> __( 'Tag page slug', 'tags-for-anspress' ),
 				'desc' 		=> __( 'Slug for tag page', 'tags-for-anspress' ),
 				'type' 		=> 'text',
-				'value' 	=> $settings['tag_page_slug'],
 				'show_desc_tip' => false,
 			),
 		));
@@ -699,7 +692,7 @@ class Tags_For_AnsPress
 
 		$tags_rules[$slug. ap_get_tag_slug() . '/([^/]+)/page/?([0-9]{1,})/?$'] = 'index.php?page_id='.$base_page_id.'&ap_page='. ap_get_tag_slug() .'&q_tag='.$wp_rewrite->preg_index( 1 ).'&paged='.$wp_rewrite->preg_index( 2 );
 
-		$tags_rules[$slug. ap_get_tags_slug(). '/?'] = 'index.php?page_id='.$base_page_id.'&ap_page='.ap_get_tags_slug();
+		$tags_rules[$slug. ap_get_tags_slug() . '/([^/]+)/page/?([0-9]{1,})/?$'] = 'index.php?page_id='.$base_page_id.'&ap_page='. ap_get_tags_slug() .'&q_tag='.$wp_rewrite->preg_index( 1 ).'&paged='.$wp_rewrite->preg_index( 2 );
 
 		return $tags_rules + $rules;
 	}
