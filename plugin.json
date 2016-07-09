@@ -1,8 +1,8 @@
 {
 	"name": "Tags for AnsPress",
 	"description": "Add tag support in AnsPress",
-	"version": "2.0.0",
-	"tested_up_to": "4.2",
+	"version": "3.0",
+	"tested_up_to": "4.4",
 	"updated": "",
 	"licence": "GPL-3.0+",
 	"licence_link": "http://www.gnu.org/licenses/gpl.txt",

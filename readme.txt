@@ -32,6 +32,15 @@ Or if you want to install it manually simple follow this:
 
 == Changelog ==
 
+= 3.0 =
+
+* Made compatible with AnsPress 3.0
+* Fixed pagination issue
+* FIX: AnsPress breadcrumb in tags page show Questions > Categories rather than tags
+* Fix: Subscribe Widget fatal error
+* Improved list filter
+* Fixed warning and use ap_option_groups for register options
+
 = 2.0.0 =
 * Improved loading order of extension
 
