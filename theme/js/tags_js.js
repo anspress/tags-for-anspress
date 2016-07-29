@@ -107,6 +107,7 @@
 						
 				if(data['items']){
 					$.each(data['items'], function(index, val) {
+						val = decodeURIComponent(val);
 						var holderItems = [];
 						$("#ap-tags-holder .ap-tag-item-value").each(function() {
 							holderItems.push($(this).text())
